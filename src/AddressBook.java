@@ -11,7 +11,7 @@ public class AddressBook {
         int result = 0;
         while (result != 4) {
             System.out.println("What do you want to perform");
-            System.out.println("1.ADD , 2.Edit , 3.Print , 4.Stop");
+            System.out.println("1.ADD , 2.Edit , 3.Delete , 4.Print , 5.Stop");
             result = input.nextInt();
             switch (result) {
                 case 1:
@@ -21,9 +21,12 @@ public class AddressBook {
                     edit(person,array);
                     break;
                 case 3:
-                    print(person,array);
+                    delete(person,array);
                     break;
                 case 4:
+                    print(person,array);
+                    break;
+                case 5:
                     stop();
                     break;
             }
@@ -109,6 +112,23 @@ public class AddressBook {
         }
     }
 
+    public static void delete(int person, Contact[] array) {
+        System.out.println("Enter the name you want to delete : ");
+        String del = input.next();
+        System.out.println("Address book is now for : " + (person - 1) + " person");
+        for (int i = 0; i < person; i++) {
+            if (del.equals(array[i].getName())) {
+                for (int j = i; j < person - 1; j++) {
+                    array[j] = array[j + 1];
+                }
+            }
+        }
+        for (int i = 0; i < person - 1; i++) {
+            System.out.println(array[i].getName() + " " + array[i].getLastname() + " " + array[i].getAddress() + " "
+                    + array[i].getState() + " " + array[i].getZip() + " " + array[i].getPhone() + " " + array[i].getEmail());
+        }
+        System.out.println("  *    *   ");
+    }
     public static void print(int person, Contact[] array) {
         for (int i = 0; i < person; i++) {
             System.out.println(array[i].getName() + " " + array[i].getLastname() + " " + array[i].getAddress() + " "
