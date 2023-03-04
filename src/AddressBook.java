@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -6,29 +7,46 @@ public class AddressBook {
 
     public static void main(String[] args) {
         System.out.println(" Welcome to Address Book Program !! ");
+        String diffAddressBook = "continue";
+        while (!diffAddressBook.equalsIgnoreCase("no")) {
+            System.out.print("Enter the name of Address Book - ");
+            String bookName = input.next();
 
-        ArrayList<Contact> array = new ArrayList<>();
-        String choice = "Null";
-        while (!choice.equalsIgnoreCase("stop")) {
-            System.out.println("What do you want to perform");
-            System.out.println("ADD , Edit , Delete , Print , Stop");
-            choice = input.next();
-            switch (choice) {
-                case "add":
-                    toAdd(array);
-                    break;
-                case "edit":
-                    toEdit(array);
-                    break;
-                case "delete":
-                    toDelete(array);
-                    break;
-                case "print":
-                    toPrint(array);
-                    break;
-                case "stop":
-                    toStop();
-                    break;
+            ArrayList<Contact> array = new ArrayList<>();
+            HashMap<String, ArrayList<Contact>> map = new HashMap<>();
+
+            String choice = "None";
+            while (!choice.equalsIgnoreCase("stop")) {
+                Contact obj = new Contact();
+                System.out.println("What do you want to perform");
+                System.out.print("ADD , Edit , Delete , Print , Stop this book - ");
+                choice = input.next();
+                switch (choice) {
+                    case "add":
+                        toAdd(array);
+                        break;
+                    case "edit":
+                        toEdit(array);
+                        break;
+                    case "delete":
+                        toDelete(array);
+                        break;
+                    case "print":
+                        toPrint(array);
+                        break;
+                    case "stop":
+                        System.out.println("Thank You for " +bookName +" Book ");
+                        break;
+                }
+                map.put(bookName, array);
+            }
+            System.out.print("Do you want to add new book - yes /no -");
+            diffAddressBook = input.next();
+            for (int j = 0; j < array.size(); j++) {
+                System.out.println(bookName + " - " + map.get(bookName).get(j).getName() + " " +
+                        map.get(bookName).get(j).getLastname() + " " + map.get(bookName).get(j).getAddress() + " " +
+                        map.get(bookName).get(j).getState() + " " + map.get(bookName).get(j).getZip() + " " +
+                        map.get(bookName).get(j).getPhone() + " " + map.get(bookName).get(j).getEmail());
             }
         }
     }
@@ -37,77 +55,77 @@ public class AddressBook {
         String option;
         do {
             Contact contact = new Contact();
-            System.out.println("enter name-");
+            System.out.print("enter name- ");
             contact.setName(input.next());
-            System.out.println("enter lastname-");
+            System.out.print("enter lastname- ");
             contact.setLastname(input.next());
-            System.out.println("enter address-");
+            System.out.print("enter address- ");
             contact.setAddress(input.next());
-            System.out.println("enter state-");
+            System.out.print("enter state- ");
             contact.setState(input.next());
-            System.out.println("enter zip code-");
+            System.out.print("enter zip code- ");
             contact.setZip(input.nextInt());
-            System.out.println("enter contact-");
+            System.out.print("enter contact- ");
             contact.setPhone(input.nextInt());
-            System.out.println("enter email-");
+            System.out.print("enter email- ");
             contact.setEmail(input.next());
             array.add(contact);
-            System.out.println("Do you want to add more (yes/no) ");
+            System.out.print("Do you want to add more (yes/no) - ");
             option = input.next();
         } while (!option.equalsIgnoreCase("no"));
     }
 
     public static void toEdit(ArrayList<Contact> array) {
         System.out.println("what you want to edit :");
-        System.out.println("name, lastname, address, state, contact");
+        System.out.print("name, lastname, address, state, contact - ");
         String choiceToEdit = input.next();
         if (choiceToEdit.equals("name")) {
-            System.out.println("whose name :");
+            System.out.print("whose name : ");
             String oldName = input.next();
             for (int j = 0; j < array.size(); j++) {
                 if (oldName.equals(array.get(j).getName())) {
-                    System.out.println("enter new name :");
+                    System.out.print("enter new name : ");
                     String newName = input.next();
                     array.get(j).setName(newName);
                 }
             }
         }
         if (choiceToEdit.equals("lastname")) {
-            System.out.println("whose lastname :");
+            System.out.print("whose lastname : ");
             String oldLastName = input.next();
             for (int j = 0; j < array.size(); j++) {
                 if (oldLastName.equals(array.get(j).getName())) {
-                    System.out.println("enter new Lastname :");
+                    System.out.print("enter new Lastname : ");
                     array.get(j).setLastname(input.next());
                 }
             }
         }
         if (choiceToEdit.equals("address")) {
-            System.out.println("whose address :");
+            System.out.print("whose address : ");
             String oldaddress = input.next();
             for (int j = 0; j < array.size(); j++) {
                 if (oldaddress.equals(array.get(j).getName())) {
-                    System.out.println("enter new address :");
+                    System.out.print("enter new address : ");
                     array.get(j).setAddress(input.next());
                 }
             }
         }
         if (choiceToEdit.equals("state")) {
-            System.out.println("whose state :");
+            System.out.print("whose state : ");
             String oldstate = input.next();
             for (int j = 0; j < array.size(); j++) {
                 if (oldstate.equals(array.get(j).getName())) {
-                    System.out.println("enter new state :");
+                    System.out.print("enter new state : ");
                     array.get(j).setState(input.next());
                 }
             }
         }
         if (choiceToEdit.equals("phone")) {
-            System.out.println("whose phone :");
+            System.out.print("whose phone : ");
             String oldphone = input.next();
             for (int j = 0; j < array.size(); j++) {
                 if (oldphone.equals(array.get(j).getName())) {
-                    System.out.println("enter new phone no. :");
+                    System.out.print("enter new phone no. : ");
                     array.get(j).setPhone(input.nextInt());
                 }
             }
@@ -115,7 +133,7 @@ public class AddressBook {
     }
 
     public static void toDelete(ArrayList<Contact> array) {
-        System.out.println("Enter the name you want to delete : ");
+        System.out.print("Enter the name you want to delete : ");
         String del = input.next();
         System.out.println("Address book is now updated ");
         for (int i = 0; i < array.size(); i++) {
@@ -137,9 +155,5 @@ public class AddressBook {
                     array.get(i).getAddress() + " " + array.get(i).getState() + " " +
                     array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
         }
-    }
-
-    public static void toStop() {
-        System.out.println("Thank you");
     }
 }
