@@ -1,19 +1,18 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
     static Scanner input = new Scanner(System.in);
+    static HashMap<String, ArrayList<Contact>> map = new HashMap<>();
+    static String bookName;
 
     public static void main(String[] args) {
         System.out.println(" Welcome to Address Book Program !! ");
         String diffAddressBook = "continue";
         while (!diffAddressBook.equalsIgnoreCase("no")) {
             System.out.print("Enter the name of Address Book - ");
-            String bookName = input.next();
+            bookName = input.next();
 
             ArrayList<Contact> array = new ArrayList<>();
-            HashMap<String, ArrayList<Contact>> map = new HashMap<>();
 
             String choice = "None";
             while (!choice.equalsIgnoreCase("stop")) {
@@ -35,19 +34,34 @@ public class AddressBook {
                         toPrint(array);
                         break;
                     case "stop":
-                        System.out.println("Thank You for " +bookName +" Book ");
+                        System.out.println("\nThank You for " + bookName + " Book ");
                         break;
                 }
                 map.put(bookName, array);
             }
+            System.out.println("This address book is -> " + bookName);
+            printHashMap(array);
             System.out.print("Do you want to add new book - yes /no -");
             diffAddressBook = input.next();
-            for (int j = 0; j < array.size(); j++) {
-                System.out.println(bookName + " - " + map.get(bookName).get(j).getName() + " " +
-                        map.get(bookName).get(j).getLastname() + " " + map.get(bookName).get(j).getAddress() + " " +
-                        map.get(bookName).get(j).getState() + " " + map.get(bookName).get(j).getZip() + " " +
-                        map.get(bookName).get(j).getPhone() + " " + map.get(bookName).get(j).getEmail());
-            }
+        }
+
+        System.out.print("Do you want to print Final AddressBook (Yes/No) -");
+        String option = input.next();
+        switch (option) {
+            case "yes":
+                for (Map.Entry<String, ArrayList<Contact>> entry : map.entrySet()) {
+                    System.out.println(entry.getKey() + " -> ");
+                    for (int i = 0; i < map.size(); i++) {
+                        System.out.println(entry.getValue().get(i).getName() + " "
+                                + entry.getValue().get(i).getLastname() + " " + entry.getValue().get(i).getAddress() + " "
+                                + entry.getValue().get(i).getState() + " " + entry.getValue().get(i).getZip() + " "
+                                + entry.getValue().get(i).getPhone() + " " + entry.getValue().get(i).getEmail());
+                    }
+                }
+                break;
+            case "no":
+                System.out.println("<  Thank You >");
+                break;
         }
     }
 
@@ -155,5 +169,15 @@ public class AddressBook {
                     array.get(i).getAddress() + " " + array.get(i).getState() + " " +
                     array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
         }
+    }
+
+    public static void printHashMap(ArrayList<Contact> array) {
+        for (int j = 0; j < array.size(); j++) {
+            System.out.println(map.get(bookName).get(j).getName() + " " +
+                    map.get(bookName).get(j).getLastname() + " " + map.get(bookName).get(j).getAddress() + " " +
+                    map.get(bookName).get(j).getState() + " " + map.get(bookName).get(j).getZip() + " " +
+                    map.get(bookName).get(j).getPhone() + " " + map.get(bookName).get(j).getEmail());
+        }
+        System.out.println();
     }
 }
