@@ -11,7 +11,7 @@ public class AddressBookMain {
         HashMap<String, ArrayList<Contact>> hMap = new HashMap<>();
 
         AddressBookMain mainBook = new AddressBookMain();
-        HashMapClass cla = new HashMapClass();
+        HashMapClass mapObject = new HashMapClass();
 
         int response = 0;
         while (response !=8) {
@@ -21,25 +21,25 @@ public class AddressBookMain {
             response = mainBook.input.nextInt();
             switch (response) {
                 case TO_ADD_NEW_BOOK:
-                    cla.addBook(hMap);
+                    mapObject.addBook(hMap);
                     break;
                 case TO_EDIT_BOOK:
-                    cla.toEdit(hMap);
+                    mapObject.toEdit(hMap);
                     break;
                 case TO_DELETE_CONTACT:
-                    cla.deleteBook(hMap);
+                    mapObject.deleteBook(hMap);
                     break;
                 case TO_PRINT_LIST_OF_BOOKS:
-                    cla.listOfBookNames(hMap);
+                    mapObject.listOfBookNames(hMap);
                     break;
                 case TO_SEARCH_WITH_BOOKNAME://Print particular book
-                    cla.particularBookName(hMap);
+                    mapObject.particularBookName(hMap);
                     break;
                 case TO_PRINT_BOOK:
-                    cla.printMap(hMap);
+                    mapObject.printMap(hMap);
                     break;
                 case TO_SEARCH_WITH_NAME:
-                    cla.searchWithName(hMap);
+                    mapObject.searchWithName(hMap);
                     break;
                 case TO_STOP_MAIN_MENU:
                     System.out.println("<  Thank You >");

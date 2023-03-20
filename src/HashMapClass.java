@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static Constants.Constants.*;
 
@@ -183,6 +185,11 @@ public class HashMapClass {
                         contactArrayList.get(i).getZip() + " " + contactArrayList.get(i).getPhone() + " " + contactArrayList.get(i).getEmail());
             }
         }
+    }
+
+    public void flatMap(HashMap<String, ArrayList<Contact>> map){
+        List <Contact> out = map.values().stream().flatMap(List :: stream).collect(Collectors.toList());
+        System.out.println(out);
     }
 
     public void printMap(HashMap<String, ArrayList<Contact>> map) {

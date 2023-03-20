@@ -1,8 +1,10 @@
 import java.util.*;
 
 public class AddressBook {
+
     public void toAdd(ArrayList<Contact> array) {
         AddressBookMain mainBook = new AddressBookMain();
+        AddressBook bookObj = new AddressBook();
         String option;
         do {
             Contact contact = new Contact();
@@ -20,11 +22,51 @@ public class AddressBook {
             contact.setPhone(mainBook.input.nextInt());
             System.out.print("enter email- ");
             contact.setEmail(mainBook.input.next());
-            array.add(contact);
+            if (OverrideEquals(array, contact) == true) {
+                System.out.println("Details of this person already exists");
+            } else {
+                array.add(contact);
+            }
             System.out.print("Do you want to add more (yes/no) - ");
             option = mainBook.input.next();
         } while (!option.equalsIgnoreCase("no"));
     }
+
+    public boolean OverrideEquals(ArrayList<Contact> array, Object obj) {
+        Contact aa = new Contact();
+        if (array == null) {
+            return false;
+        }
+        Contact contact = (Contact) obj;
+        for (int j = 0; j < array.size(); j++) {
+            if (contact.getName().equals(array.get(j).getName())) {
+                if (contact.getLastname().equals(array.get(j).getLastname()) && contact.getAddress().equals(array.get(j).getAddress())
+                        && contact.getState().equals(array.get(j).getState()) && contact.getZip() == array.get(j).getZip()
+                        && contact.getPhone() == array.get(j).getPhone() && contact.getEmail().equals(array.get(j).getEmail())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == null) {
+//            return false;
+//        }
+//
+//        Contact contact = (Contact) obj;
+//        Contact contactObj=new Contact();
+//        if (contact.getName().equals(contactObj.getName())) {
+//            if (contact.getLastname().equals(contactObj.getLastname()) && contact.getAddress().equals(contactObj.getAddress())
+//                    && contact.getState().equals(contactObj.getState()) && contact.getZip() == contactObj.getZip()
+//                    && contact.getPhone() == contactObj.getPhone() && contact.getEmail().equals(contactObj.getEmail())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public void toEdit(ArrayList<Contact> array) {
         AddressBookMain mainBook = new AddressBookMain();
