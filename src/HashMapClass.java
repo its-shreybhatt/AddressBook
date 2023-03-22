@@ -171,6 +171,8 @@ public class HashMapClass {
 
     public void searchByCity(HashMap<String, ArrayList<Contact>> map) {
         AddressBookMain mainBook = new AddressBookMain();
+        HashMap<String, String> cityMap = new HashMap<>();
+        HashMap<String, String> stateMap = new HashMap<>();
         System.out.println("How do you want to Search -> 1.City / 2.State");
         int option = mainBook.input.nextInt();
         switch (option) {
@@ -181,9 +183,14 @@ public class HashMapClass {
                     for (int i = 0; i < entry.getValue().size(); i++) {
                         if (entry.getValue().get(i).getCity().equals(cityName)) {
                             System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
+                            cityMap.put(cityName, entry.getValue().get(i).getName() + " " + entry.getValue().get(i).getLastname());
                         }
                     }
                 }
+                for (int i = 0; i < cityMap.size(); i++) {
+                    System.out.println(cityMap);
+                }
+
                 break;
             case SEARCH_BY_STATE:
                 System.out.println("Please enter name of state");
@@ -192,9 +199,14 @@ public class HashMapClass {
                     for (int i = 0; i < entry.getValue().size(); i++) {
                         if (entry.getValue().get(i).getState().equals(stateName)) {
                             System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
+                            stateMap.put(stateName, entry.getValue().get(i).getName() + " " + entry.getValue().get(i).getLastname());
                         }
                     }
                 }
+                for (int i = 0; i < stateMap.size(); i++) {
+                    System.out.println(stateMap);
+                }
+                break;
         }
 //        System.out.println("Please enter name of state");
 //        String stateName = mainBook.input.next();
