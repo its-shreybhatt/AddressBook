@@ -9,7 +9,7 @@ public class Constants {
     public static final int TO_SEARCH_WITH_BOOKNAME = 5;
     public static final int TO_PRINT_BOOK = 6;
     public static final int TO_SEARCH_WITH_NAME = 7;
-    public static final int SEARCH_BY_CITY_STATE=8;
+    public static final int SEARCH_BY_CITY_STATE = 8;
     public static final int TO_STOP_MAIN_MENU = 9;
 
     // HashMap Class

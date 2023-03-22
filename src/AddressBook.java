@@ -2,7 +2,7 @@ import java.util.*;
 
 public class AddressBook {
 
-    public void toAdd(ArrayList<Contact> array) {
+    public void toAdd(LinkedList<Contact> myList) {
         AddressBookMain mainBook = new AddressBookMain();
         String option;
         do {
@@ -23,18 +23,18 @@ public class AddressBook {
             contact.setPhone(mainBook.input.nextInt());
             System.out.print("enter email- ");
             contact.setEmail(mainBook.input.next());
-//            if(array.stream().anyMatch(match->contact.equals(match))){
-            if (OverrideEquals(array, contact)) {
+//            if(myList.stream().anyMatch(match->contact.equals(match))){
+            if (OverrideEquals(myList, contact)) {
                 System.out.println("Details of this person already exists");
-            } else array.add(contact);
+            } else myList.add(contact);
             System.out.print("Do you want to add more (yes/no) - ");
             option = mainBook.input.next();
         } while (!option.equalsIgnoreCase("no"));
     }
 
-    public boolean OverrideEquals(ArrayList<Contact> array, Object obj) {
+    public boolean OverrideEquals(LinkedList<Contact> myList, Object obj) {
         Contact contact = (Contact) obj;
-        for (Contact value : array) {
+        for (Contact value : myList) {
             if (contact.getName().equals(value.getName())) {
                 if (contact.getLastname().equals(value.getLastname()) && contact.getAddress().equals(value.getAddress())
                         && contact.getCity().equals(value.getCity()) && contact.getState().equals(value.getState())
@@ -45,7 +45,7 @@ public class AddressBook {
             }
         }
         return false;
-//            array.stream().forEach(value->{
+//            myList.stream().forEach(value->{
 //                if (contact.getName().equals(value.getName())) {
 //                    if (contact.getLastname().equals(value.getLastname()) && contact.getAddress().equals(value.getAddress())
 //                            && contact.getState().equals(value.getState()) && contact.getZip() == value.getZip()
@@ -54,7 +54,7 @@ public class AddressBook {
 //            });
     }
 
-    public void toEdit(ArrayList<Contact> array) {
+    public void toEdit(LinkedList<Contact> myList) {
         AddressBookMain mainBook = new AddressBookMain();
         System.out.println("what you want to edit :");
         System.out.print("name, lastname, address, state, contact - ");
@@ -62,79 +62,79 @@ public class AddressBook {
         if (choiceToEdit.equals("name")) {
             System.out.print("whose name : ");
             String oldName = mainBook.input.next();
-            for (int j = 0; j < array.size(); j++) {
-                if (oldName.equals(array.get(j).getName())) {
+            for (int j = 0; j < myList.size(); j++) {
+                if (oldName.equals(myList.get(j).getName())) {
                     System.out.print("enter new name : ");
                     String newName = mainBook.input.next();
-                    array.get(j).setName(newName);
+                    myList.get(j).setName(newName);
                 }
             }
         }
         if (choiceToEdit.equals("lastname")) {
             System.out.print("whose lastname : ");
             String oldLastName = mainBook.input.next();
-            for (int j = 0; j < array.size(); j++) {
-                if (oldLastName.equals(array.get(j).getName())) {
+            for (int j = 0; j < myList.size(); j++) {
+                if (oldLastName.equals(myList.get(j).getName())) {
                     System.out.print("enter new Lastname : ");
-                    array.get(j).setLastname(mainBook.input.next());
+                    myList.get(j).setLastname(mainBook.input.next());
                 }
             }
         }
         if (choiceToEdit.equals("address")) {
             System.out.print("whose address : ");
-            String oldaddress = mainBook.input.next();
-            for (int j = 0; j < array.size(); j++) {
-                if (oldaddress.equals(array.get(j).getName())) {
+            String oldAddress = mainBook.input.next();
+            for (int j = 0; j < myList.size(); j++) {
+                if (oldAddress.equals(myList.get(j).getName())) {
                     System.out.print("enter new address : ");
-                    array.get(j).setAddress(mainBook.input.next());
+                    myList.get(j).setAddress(mainBook.input.next());
                 }
             }
         }
         if (choiceToEdit.equals("state")) {
             System.out.print("whose state : ");
-            String oldstate = mainBook.input.next();
-            for (int j = 0; j < array.size(); j++) {
-                if (oldstate.equals(array.get(j).getName())) {
+            String oldState = mainBook.input.next();
+            for (int j = 0; j < myList.size(); j++) {
+                if (oldState.equals(myList.get(j).getName())) {
                     System.out.print("enter new state : ");
-                    array.get(j).setState(mainBook.input.next());
+                    myList.get(j).setState(mainBook.input.next());
                 }
             }
         }
         if (choiceToEdit.equals("phone")) {
             System.out.print("whose phone : ");
-            String oldphone = mainBook.input.next();
-            for (int j = 0; j < array.size(); j++) {
-                if (oldphone.equals(array.get(j).getName())) {
+            String oldPhone = mainBook.input.next();
+            for (int j = 0; j < myList.size(); j++) {
+                if (oldPhone.equals(myList.get(j).getName())) {
                     System.out.print("enter new phone no. : ");
-                    array.get(j).setPhone(mainBook.input.nextInt());
+                    myList.get(j).setPhone(mainBook.input.nextInt());
                 }
             }
         }
     }
 
-    public void toDelete(ArrayList<Contact> array) {
+    public void toDelete(LinkedList<Contact> myList) {
         AddressBookMain mainBook = new AddressBookMain();
         System.out.print("Enter the name you want to delete : ");
-        String del = mainBook.input.next();
+        String nameToDelete = mainBook.input.next();
         System.out.println("Address book is now updated ");
-        for (int i = 0; i < array.size(); i++) {
-            if (del.equals(array.get(i).getName())) {
-                array.remove(array.get(i));
+        for (int i = 0; i < myList.size(); i++) {
+            if (nameToDelete.equals(myList.get(i).getName())) {
+                myList.remove(myList.get(i));
             }
         }
-        for (int i = 0; i < array.size(); i++) {
-            System.out.println(array.get(i).getName() + " " + array.get(i).getLastname() + " " +
-                    array.get(i).getAddress() + " " + array.get(i).getCity() + " " + array.get(i).getState() + " " +
-                    array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
+        for (int i = 0; i < myList.size(); i++) {
+            System.out.println(myList.get(i).getName() + " " + myList.get(i).getLastname() + " " +
+                    myList.get(i).getAddress() + " " + myList.get(i).getCity() + " " + myList.get(i).getState() + " " +
+                    myList.get(i).getZip() + " " + myList.get(i).getPhone() + " " + myList.get(i).getEmail());
         }
         System.out.println("  *    *   ");
     }
 
-    public void toPrint(ArrayList<Contact> array) {
-        for (int i = 0; i < array.size(); i++) {
-            System.out.println(array.get(i).getName() + " " + array.get(i).getLastname() + " " +
-                    array.get(i).getAddress() + " " +array.get(i).getCity() +" " +array.get(i).getState() + " " +
-                    array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
+    public void toPrint(LinkedList<Contact> myList) {
+        for (int i = 0; i < myList.size(); i++) {
+            System.out.println(myList.get(i).getName() + " " + myList.get(i).getLastname() + " " +
+                    myList.get(i).getAddress() + " " + myList.get(i).getCity() + " " + myList.get(i).getState() + " " +
+                    myList.get(i).getZip() + " " + myList.get(i).getPhone() + " " + myList.get(i).getEmail());
         }
     }
 }

@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import static Constants.Constants.*;
@@ -9,7 +9,7 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         System.out.println(" Welcome to Address Book Program !! ");
-        HashMap<String, ArrayList<Contact>> hMap = new HashMap<>();
+        HashMap<String, LinkedList<Contact>> hMap = new HashMap<>();
 
         AddressBookMain mainBook = new AddressBookMain();
         HashMapClass mapObject = new HashMapClass();
