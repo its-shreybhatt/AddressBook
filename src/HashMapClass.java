@@ -179,30 +179,35 @@ public class HashMapClass {
             case SEARCH_BY_CITY:
                 System.out.println("Please enter name of city");
                 String cityName = mainBook.input.next();
+                int cityCount=0;
                 for (Map.Entry<String, ArrayList<Contact>> entry : map.entrySet()) {
                     for (int i = 0; i < entry.getValue().size(); i++) {
                         if (entry.getValue().get(i).getCity().equals(cityName)) {
                             System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
                             cityMap.put(cityName, entry.getValue().get(i).getName() + " " + entry.getValue().get(i).getLastname());
+                            cityCount++;
                         }
                     }
                 }
+                System.out.println("Number of Contacts found in City " +cityName +" = " +cityCount);
                 for (int i = 0; i < cityMap.size(); i++) {
                     System.out.println(cityMap);
                 }
-
                 break;
             case SEARCH_BY_STATE:
                 System.out.println("Please enter name of state");
                 String stateName = mainBook.input.next();
+                int stateCount=0;
                 for (Map.Entry<String, ArrayList<Contact>> entry : map.entrySet()) {
                     for (int i = 0; i < entry.getValue().size(); i++) {
                         if (entry.getValue().get(i).getState().equals(stateName)) {
                             System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
                             stateMap.put(stateName, entry.getValue().get(i).getName() + " " + entry.getValue().get(i).getLastname());
+                            stateCount+=1;
                         }
                     }
                 }
+                System.out.println("Number of Contacts found in City " +stateName +" = " +stateCount);
                 for (int i = 0; i < stateMap.size(); i++) {
                     System.out.println(stateMap);
                 }
