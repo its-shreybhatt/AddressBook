@@ -2,8 +2,18 @@ public class Contact {
     private String name;
     private String lastname;
     private String address;
+    private String city;
     private String state;
     private int zip;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     private int phone;
     private String email;
 
@@ -61,5 +71,19 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phone=" + phone +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

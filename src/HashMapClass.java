@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static Constants.Constants.*;
 
 public class HashMapClass {
+
     public void addBook(HashMap<String, ArrayList<Contact>> map) {
         AddressBookMain mainBook = new AddressBookMain();
         AddressBook addressBook = new AddressBook();
@@ -61,21 +59,21 @@ public class HashMapClass {
             if (choiceToEdit.equals("name")) {
                 System.out.print("whose name : ");
                 String oldName = mainBook.input.next();
-                for (int j = 0; j < contactArrayList.size(); j++) {
-                    if (oldName.equals(contactArrayList.get(j).getName())) {
+                for (Contact contact : contactArrayList) {
+                    if (oldName.equals(contact.getName())) {
                         System.out.print("enter new name : ");
                         String newName = mainBook.input.next();
-                        contactArrayList.get(j).setName(newName);
+                        contact.setName(newName);
                     }
                 }
             }
             if (choiceToEdit.equals("lastname")) {
                 System.out.print("whose lastname : ");
                 String oldLastName = mainBook.input.next();
-                for (int j = 0; j < contactArrayList.size(); j++) {
-                    if (oldLastName.equals(contactArrayList.get(j).getName())) {
+                for (Contact contact : contactArrayList) {
+                    if (oldLastName.equals(contact.getName())) {
                         System.out.print("enter new Lastname : ");
-                        contactArrayList.get(j).setLastname(mainBook.input.next());
+                        contact.setLastname(mainBook.input.next());
                     }
                 }
             }
@@ -128,10 +126,10 @@ public class HashMapClass {
                     contactArrayList.remove(contactArrayList.get(i));
                 }
             }
-            for (int i = 0; i < contactArrayList.size(); i++) {
-                System.out.println(contactArrayList.get(i).getName() + " " + contactArrayList.get(i).getLastname() + " " +
-                        contactArrayList.get(i).getAddress() + " " + contactArrayList.get(i).getState() + " " +
-                        contactArrayList.get(i).getZip() + " " + contactArrayList.get(i).getPhone() + " " + contactArrayList.get(i).getEmail());
+            for (Contact contact : contactArrayList) {
+                System.out.println(contact.getName() + " " + contact.getLastname() + " " +
+                        contact.getAddress() + " " + contact.getCity() + " " + contact.getState() + " " +
+                        contact.getZip() + " " + contact.getPhone() + " " + contact.getEmail());
             }
             System.out.println("  *    *   ");
         }
@@ -171,6 +169,45 @@ public class HashMapClass {
         System.out.println();
     }
 
+    public void searchByCity(HashMap<String, ArrayList<Contact>> map) {
+        AddressBookMain mainBook = new AddressBookMain();
+        System.out.println("How do you want to Search -> 1.City / 2.State");
+        int option = mainBook.input.nextInt();
+        switch (option) {
+            case SEARCH_BY_CITY:
+                System.out.println("Please enter name of city");
+                String cityName = mainBook.input.next();
+                for (Map.Entry<String, ArrayList<Contact>> entry : map.entrySet()) {
+                    for (int i = 0; i < entry.getValue().size(); i++) {
+                        if (entry.getValue().get(i).getCity().equals(cityName)) {
+                            System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
+                        }
+                    }
+                }
+                break;
+            case SEARCH_BY_STATE:
+                System.out.println("Please enter name of state");
+                String stateName = mainBook.input.next();
+                for (Map.Entry<String, ArrayList<Contact>> entry : map.entrySet()) {
+                    for (int i = 0; i < entry.getValue().size(); i++) {
+                        if (entry.getValue().get(i).getState().equals(stateName)) {
+                            System.out.println(entry.getValue().get(i).getName() + " " + (entry.getValue().get(i).getLastname()));
+                        }
+                    }
+                }
+        }
+//        System.out.println("Please enter name of state");
+//        String stateName = mainBook.input.next();
+//        List<Contact> stateList= null;
+//        for (int i=0;i< map.size();i++) {
+//            stateList = map.get(i).stream().filter(state -> state.getState().equals(stateName)).collect(Collectors.toList());
+//        }
+//        System.out.println(stateList);
+//            if (entry.getValue().stream().anyMatch(state -> stateName.equals(state))) {
+//                logic
+//            } else System.out.println("Please enter correct state Name");
+    }
+
     public void particularBookName(HashMap<String, ArrayList<Contact>> map) {
         AddressBookMain mainBook = new AddressBookMain();
         System.out.println("enter the name of book");
@@ -181,15 +218,11 @@ public class HashMapClass {
             ArrayList<Contact> contactArrayList = map.get(bookName);
             for (int i = 0; i < contactArrayList.size(); i++) {
                 System.out.println(contactArrayList.get(i).getName() + " " + contactArrayList.get(i).getLastname() + " " +
-                        contactArrayList.get(i).getAddress() + " " + contactArrayList.get(i).getState() + " " +
-                        contactArrayList.get(i).getZip() + " " + contactArrayList.get(i).getPhone() + " " + contactArrayList.get(i).getEmail());
+                        contactArrayList.get(i).getAddress() + " " + contactArrayList.get(i).getCity() + " " +
+                        contactArrayList.get(i).getState() + " " + contactArrayList.get(i).getZip() + " " +
+                        contactArrayList.get(i).getPhone() + " " + contactArrayList.get(i).getEmail());
             }
         }
-    }
-
-    public void flatMap(HashMap<String, ArrayList<Contact>> map){
-        List <Contact> out = map.values().stream().flatMap(List :: stream).collect(Collectors.toList());
-        System.out.println(out);
     }
 
     public void printMap(HashMap<String, ArrayList<Contact>> map) {
@@ -198,8 +231,9 @@ public class HashMapClass {
             for (int i = 0; i < entry.getValue().size(); i++) {
                 System.out.println(entry.getValue().get(i).getName() + " "
                         + entry.getValue().get(i).getLastname() + " " + entry.getValue().get(i).getAddress() + " "
-                        + entry.getValue().get(i).getState() + " " + entry.getValue().get(i).getZip() + " "
-                        + entry.getValue().get(i).getPhone() + " " + entry.getValue().get(i).getEmail());
+                        + entry.getValue().get(i).getCity() + " " + entry.getValue().get(i).getState() + " " +
+                        entry.getValue().get(i).getZip() + " " + entry.getValue().get(i).getPhone() + " " +
+                        entry.getValue().get(i).getEmail());
             }
         }
     }

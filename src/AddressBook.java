@@ -4,7 +4,6 @@ public class AddressBook {
 
     public void toAdd(ArrayList<Contact> array) {
         AddressBookMain mainBook = new AddressBookMain();
-        AddressBook bookObj = new AddressBook();
         String option;
         do {
             Contact contact = new Contact();
@@ -14,6 +13,8 @@ public class AddressBook {
             contact.setLastname(mainBook.input.next());
             System.out.print("enter address- ");
             contact.setAddress(mainBook.input.next());
+            System.out.print("enter city- ");
+            contact.setCity(mainBook.input.next());
             System.out.print("enter state- ");
             contact.setState(mainBook.input.next());
             System.out.print("enter zip code- ");
@@ -22,51 +23,36 @@ public class AddressBook {
             contact.setPhone(mainBook.input.nextInt());
             System.out.print("enter email- ");
             contact.setEmail(mainBook.input.next());
-            if (OverrideEquals(array, contact) == true) {
+//            if(array.stream().anyMatch(match->contact.equals(match))){
+            if (OverrideEquals(array, contact)) {
                 System.out.println("Details of this person already exists");
-            } else {
-                array.add(contact);
-            }
+            } else array.add(contact);
             System.out.print("Do you want to add more (yes/no) - ");
             option = mainBook.input.next();
         } while (!option.equalsIgnoreCase("no"));
     }
 
     public boolean OverrideEquals(ArrayList<Contact> array, Object obj) {
-        Contact aa = new Contact();
-        if (array == null) {
-            return false;
-        }
         Contact contact = (Contact) obj;
-        for (int j = 0; j < array.size(); j++) {
-            if (contact.getName().equals(array.get(j).getName())) {
-                if (contact.getLastname().equals(array.get(j).getLastname()) && contact.getAddress().equals(array.get(j).getAddress())
-                        && contact.getState().equals(array.get(j).getState()) && contact.getZip() == array.get(j).getZip()
-                        && contact.getPhone() == array.get(j).getPhone() && contact.getEmail().equals(array.get(j).getEmail())) {
+        for (Contact value : array) {
+            if (contact.getName().equals(value.getName())) {
+                if (contact.getLastname().equals(value.getLastname()) && contact.getAddress().equals(value.getAddress())
+                        && contact.getCity().equals(value.getCity()) && contact.getState().equals(value.getState())
+                        && contact.getZip() == value.getZip() && contact.getPhone() == value.getPhone()
+                        && contact.getEmail().equals(value.getEmail())) {
                     return true;
                 }
             }
         }
         return false;
+//            array.stream().forEach(value->{
+//                if (contact.getName().equals(value.getName())) {
+//                    if (contact.getLastname().equals(value.getLastname()) && contact.getAddress().equals(value.getAddress())
+//                            && contact.getState().equals(value.getState()) && contact.getZip() == value.getZip()
+//                            && contact.getPhone() == value.getPhone() && contact.getEmail().equals(value.getEmail()));
+//                }
+//            });
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj == null) {
-//            return false;
-//        }
-//
-//        Contact contact = (Contact) obj;
-//        Contact contactObj=new Contact();
-//        if (contact.getName().equals(contactObj.getName())) {
-//            if (contact.getLastname().equals(contactObj.getLastname()) && contact.getAddress().equals(contactObj.getAddress())
-//                    && contact.getState().equals(contactObj.getState()) && contact.getZip() == contactObj.getZip()
-//                    && contact.getPhone() == contactObj.getPhone() && contact.getEmail().equals(contactObj.getEmail())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     public void toEdit(ArrayList<Contact> array) {
         AddressBookMain mainBook = new AddressBookMain();
@@ -138,7 +124,7 @@ public class AddressBook {
         }
         for (int i = 0; i < array.size(); i++) {
             System.out.println(array.get(i).getName() + " " + array.get(i).getLastname() + " " +
-                    array.get(i).getAddress() + " " + array.get(i).getState() + " " +
+                    array.get(i).getAddress() + " " + array.get(i).getCity() + " " + array.get(i).getState() + " " +
                     array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
         }
         System.out.println("  *    *   ");
@@ -147,7 +133,7 @@ public class AddressBook {
     public void toPrint(ArrayList<Contact> array) {
         for (int i = 0; i < array.size(); i++) {
             System.out.println(array.get(i).getName() + " " + array.get(i).getLastname() + " " +
-                    array.get(i).getAddress() + " " + array.get(i).getState() + " " +
+                    array.get(i).getAddress() + " " +array.get(i).getCity() +" " +array.get(i).getState() + " " +
                     array.get(i).getZip() + " " + array.get(i).getPhone() + " " + array.get(i).getEmail());
         }
     }
