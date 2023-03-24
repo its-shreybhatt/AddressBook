@@ -3,7 +3,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import static Constants.Constants.*;
-
 public class AddressBookMain {
     Scanner input = new Scanner(System.in);
 
@@ -33,7 +32,7 @@ public class AddressBookMain {
                     case TO_PRINT_LIST_OF_BOOKS:
                         mapObject.listOfBookNames(hMap);
                         break;
-                    case TO_SEARCH_WITH_BOOKNAME://Print particular book
+                    case TO_PRINT_PARTICULAR_BOOK:
                         mapObject.particularBookName(hMap);
                         break;
                     case TO_PRINT_BOOK:
@@ -49,11 +48,10 @@ public class AddressBookMain {
                         System.out.println("<  Thank You >");
                         break;
                     default:
-//                        System.out.println("Please Try Again");
                         throw new CustomException("Invalid Input Please Try Again");
                 }
-            } catch (Exception e) {
-                throw new CustomException("Invalid Input Please Try Again");
+            } catch (CustomException e) {
+                System.out.println(e.getMessage());
 
             }
         }
