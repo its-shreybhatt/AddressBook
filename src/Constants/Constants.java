@@ -24,4 +24,12 @@ public class Constants {
     public static final int SEARCH_BY_CITY = 1;
     public static final int SEARCH_BY_STATE = 2;
 
+    public enum sortingType {
+        SORT_BY_NAM, SORT_BY_CITY, SORT_BY_STATE
+    }
+
+    public static final int SORT_BY_NAME = 1;
+    public static final int SORT_BY_CITY = 2;
+    public static final int SORT_BY_STATE = 3;
+
 }

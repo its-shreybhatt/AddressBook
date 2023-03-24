@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,7 +37,7 @@ public class HashMapClass {
                         addressBook.toPrint(myLinkedList);
                         break;
                     case TO_SORT:
-                        addressBook.sortByName(myLinkedList);
+                        addressBook.toSortDetails(myLinkedList);
                         break;
                     case TO_STOP_BOOK:
                         System.out.println("\nThank You for " + bookName + " Book \n");
@@ -184,7 +185,6 @@ public class HashMapClass {
     }
 
     public void printMap(HashMap<String, LinkedList<Contact>> map) {
-
         System.out.println(map.entrySet().stream().flatMap(p -> p.getValue().stream()).collect(Collectors.toList()));
         System.out.println("Method 2");
 

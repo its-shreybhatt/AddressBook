@@ -1,3 +1,5 @@
+import static Constants.Constants.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -61,7 +63,7 @@ public class AddressBook {
             String oldName = mainBook.input.next();
 
             myList.stream().filter(p -> oldName.equals(p.getName())).forEach(list -> {
-                    System.out.print("enter new address : ");
+                System.out.print("enter new address : ");
                 list.setAddress(mainBook.input.next());
             });
         }
@@ -78,7 +80,7 @@ public class AddressBook {
             System.out.print("whose phone : ");
             String oldName = mainBook.input.next();
 
-            myList.stream().filter(p->p.getName().equals(oldName)).forEach(p->{
+            myList.stream().filter(p -> p.getName().equals(oldName)).forEach(p -> {
                 System.out.print("enter new phone no. : ");
                 p.setPhone(mainBook.input.nextInt());
             });
@@ -93,9 +95,22 @@ public class AddressBook {
         IntStream.range(0, myList.size()).filter(i -> nameToDelete.equals(myList.get(i).getName())).forEach(i -> myList.remove(myList.get(i)));
     }
 
-    public void sortByName(LinkedList<Contact> myList) {
+    public void toSortDetails(LinkedList<Contact> myList) {
+        AddressBookMain mainBook = new AddressBookMain();
+        System.out.print("How do you want to Sort Data - 1.Name , 2.City , 3.State - ");
+        int sortingChoice = mainBook.input.nextInt();
 
-        System.out.println(myList.stream().sorted((p,q)->p.getName().compareTo(q.getName())).collect(Collectors.toList()));
+        switch (sortingChoice) {
+            case SORT_BY_NAME:
+                System.out.println(myList.stream().sorted((p, q) -> p.getName().compareTo(q.getName())).collect(Collectors.toList()));
+                break;
+            case SORT_BY_CITY:
+                System.out.println(myList.stream().sorted((p, q) -> p.getCity().compareTo(q.getCity())).collect(Collectors.toList()));
+                break;
+            case SORT_BY_STATE:
+                System.out.println(myList.stream().sorted((p, q) -> p.getState().compareTo(q.getState())).collect(Collectors.toList()));
+                break;
+        }
     }
 
     public void toPrint(LinkedList<Contact> myList) {
