@@ -1,5 +1,10 @@
-
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -56,49 +61,52 @@ public class HashMapClass {
             System.out.println(bookName + " Book does not exists ");
         } else {
             LinkedList<Contact> contactLinkedList = map.get(bookName);
-
-            System.out.println("what you want to edit :");
-            System.out.print("name, lastname, address, state, phone - ");
-            String choiceToEdit = mainBook.input.next();
-            if (choiceToEdit.equals("name")) {
-                System.out.print("whose name : ");
-                String oldName = mainBook.input.next();
-                contactLinkedList.stream().filter(predicate -> oldName.equals(predicate.getName())).forEach(newStream -> {
-                    System.out.print("enter new name : ");
-                    newStream.setName(mainBook.input.next());
-                });
-            }
-            if (choiceToEdit.equals("lastname")) {
-                System.out.print("whose lastname : ");
-                String oldName = mainBook.input.next();
-                IntStream.range(0, contactLinkedList.size()).filter(j -> oldName.equals(contactLinkedList.get(j).getName())).forEach(j -> {
-                    System.out.print("enter new Lastname : ");
-                    contactLinkedList.get(j).setLastname(mainBook.input.next());
-                });
-            }
-            if (choiceToEdit.equals("address")) {
-                System.out.print("whose address : ");
-                String oldName = mainBook.input.next();
-                contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
-                    System.out.print("enter new address : ");
-                    contact.setAddress(mainBook.input.next());
-                });
-            }
-            if (choiceToEdit.equals("state")) {
-                System.out.print("whose state : ");
-                String oldName = mainBook.input.next();
-                contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
-                    System.out.print("enter new state : ");
-                    contact.setState(mainBook.input.next());
-                });
-            }
-            if (choiceToEdit.equals("phone")) {
-                System.out.print("whose phone : ");
-                String oldName = mainBook.input.next();
-                contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
-                    System.out.print("enter new phone no. : ");
-                    contact.setPhone(mainBook.input.nextInt());
-                });
+            if (contactLinkedList.size() == 0) {
+                System.out.println("Address Book is Empty");
+            } else {
+                System.out.println("what you want to edit :");
+                System.out.print("name, lastname, address, state, phone - ");
+                String choiceToEdit = mainBook.input.next();
+                if (choiceToEdit.equals("name")) {
+                    System.out.print("whose name : ");
+                    String oldName = mainBook.input.next();
+                    contactLinkedList.stream().filter(predicate -> oldName.equals(predicate.getName())).forEach(newStream -> {
+                        System.out.print("enter new name : ");
+                        newStream.setName(mainBook.input.next());
+                    });
+                }
+                if (choiceToEdit.equals("lastname")) {
+                    System.out.print("whose lastname : ");
+                    String oldName = mainBook.input.next();
+                    IntStream.range(0, contactLinkedList.size()).filter(j -> oldName.equals(contactLinkedList.get(j).getName())).forEach(j -> {
+                        System.out.print("enter new Lastname : ");
+                        contactLinkedList.get(j).setLastname(mainBook.input.next());
+                    });
+                }
+                if (choiceToEdit.equals("address")) {
+                    System.out.print("whose address : ");
+                    String oldName = mainBook.input.next();
+                    contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
+                        System.out.print("enter new address : ");
+                        contact.setAddress(mainBook.input.next());
+                    });
+                }
+                if (choiceToEdit.equals("state")) {
+                    System.out.print("whose state : ");
+                    String oldName = mainBook.input.next();
+                    contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
+                        System.out.print("enter new state : ");
+                        contact.setState(mainBook.input.next());
+                    });
+                }
+                if (choiceToEdit.equals("phone")) {
+                    System.out.print("whose phone : ");
+                    String oldName = mainBook.input.next();
+                    contactLinkedList.stream().filter(contact -> oldName.equals(contact.getName())).forEach(contact -> {
+                        System.out.print("enter new phone no. : ");
+                        contact.setPhone(mainBook.input.nextInt());
+                    });
+                }
             }
         }
     }
@@ -130,24 +138,24 @@ public class HashMapClass {
         System.out.println();
     }
 
-    public void searchWithName(HashMap<String, LinkedList<Contact>> map) {
+    public void toSearch(HashMap<String, LinkedList<Contact>> map) {
         AddressBookMain mainBook = new AddressBookMain();
-        System.out.println("enter the name you want to search ");
-        String contactName = mainBook.input.next();
-
-        int count = (int) map.entrySet().stream().flatMap(p -> p.getValue().stream())
-                .filter(p -> p.getName().equals(contactName)).count();
-        if (count >= 1) {
-            System.out.println(map.entrySet().stream().flatMap(p -> p.getValue().stream())
-                    .filter(p -> p.getName().equals(contactName)).collect(Collectors.toList()));
-        } else System.out.println("Name " + contactName + " does not exists ");
-    }
-
-    public void searchByCity(HashMap<String, LinkedList<Contact>> map) {
-        AddressBookMain mainBook = new AddressBookMain();
-        System.out.println("How do you want to Search -> 1.City / 2.State");
+        System.out.println("How do you want to Search -> 1.Name / 2.City / 3.State");
         int option = mainBook.input.nextInt();
+
         switch (option) {
+            case SEARCH_BY_NAME:
+                System.out.println("enter the name you want to search ");
+                String contactName = mainBook.input.next();
+
+                int count = (int) map.entrySet().stream().flatMap(p -> p.getValue().stream())
+                        .filter(p -> p.getName().equals(contactName)).count();
+                if (count >= 1) {
+                    System.out.println(map.entrySet().stream().flatMap(p -> p.getValue().stream())
+                            .filter(p -> p.getName().equals(contactName)).collect(Collectors.toList()));
+                } else System.out.println("Name " + contactName + " does not exists ");
+                break;
+
             case SEARCH_BY_CITY:
                 System.out.println("Please enter name of city");
                 String cityName = mainBook.input.next();

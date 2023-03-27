@@ -1,8 +1,8 @@
-import static Constants.Constants.*;
-
-import java.util.*;
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static Constants.Constants.*;
 
 public class AddressBook {
 
@@ -28,7 +28,7 @@ public class AddressBook {
             System.out.print("enter email- ");
             contact.setEmail(mainBook.input.next());
             if (myList.stream().anyMatch(match -> contact.getPhone() == match.getPhone() || contact.getEmail().equals(match.getEmail()))) {    //Duplicate
-                System.out.println("Details of this person already exists");
+                System.out.println("Details of this person already exists or Invalid details");
             } else myList.add(contact);
             System.out.print("Do you want to add more (yes/no) - ");
             option = mainBook.input.next();
