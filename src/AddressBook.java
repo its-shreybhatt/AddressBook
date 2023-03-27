@@ -6,7 +6,6 @@ import static Constants.Constants.*;
 
 public class AddressBook {
 
-
     public void toAdd(LinkedList<Contact> myList) {
         AddressBookMain mainBook = new AddressBookMain();
         String option;
